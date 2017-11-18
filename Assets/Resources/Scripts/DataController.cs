@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class DataController : MonoBehaviour {
-	public KeyCode [] skillKeys = new KeyCode[4] {KeyCode.Alpha1,KeyCode.Alpha2,KeyCode.Alpha3,KeyCode.Alpha4};
+	public KeyCode [] skillKeys = new KeyCode[4];
+	public KeyCode [] itemKeys = new KeyCode[4];
 
 	public Skill[] hotkeySkills = new Skill[4];
 	public Skill[] skill;
@@ -24,10 +25,10 @@ public class DataController : MonoBehaviour {
 		setSkill(1,"Piercing Force");
 		setSkill(2,"Swarm");
 		setSkill(3,"Escort");
-		// skillCooldown[0] = hotkeySkills[0].getCooldown();
-		// skillCooldown[1] = hotkeySkills[1].getCooldown();
-		// skillCooldown[2] = hotkeySkills[2].getCooldown();
-		// skillCooldown[3] = hotkeySkills[3].getCooldown();
+		skillCooldown[0] = hotkeySkills[0].getCooldown();
+		skillCooldown[1] = hotkeySkills[1].getCooldown();
+		skillCooldown[2] = hotkeySkills[2].getCooldown();
+		skillCooldown[3] = hotkeySkills[3].getCooldown();
 
 		for (int i = 0; i < 4; i++) {
 			if (ui_skill != null) {

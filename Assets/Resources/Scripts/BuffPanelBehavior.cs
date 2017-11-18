@@ -1,24 +1,47 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BuffPanelBehavior : MonoBehaviour {
 	private List<Buff> playerBuffList = null;
-	private List<GameObject> buffDisplay = new List<GameObject>();
+	
+	void OnGUI() {
+		GUIStyle style = new GUIStyle();
+		style.font = Resources.Load<Font>("Font/IMAGINE_FONT");
+		style.fontSize = 18;
+		style.alignment = TextAnchor.UpperCenter;
+		style.fontStyle = FontStyle.Bold;
+		style.normal.textColor = Color.white;
+		
+		for (int i = 0; i < playerBuffList.Count; i++) {
+			Buff b = playerBuffList[i];
 
-	// Use this for initialization
-	void Start () {
-		for (int i = 0; i < 10; i++) {
-			buffDisplay.Add(Instantiate(Resources.Load<GameObject>("GameObjects/BuffDisplay")));
-			buffDisplay[i].transform.SetParent(gameObject.transform);
-			buffDisplay[i].transform.position = gameObject.transform.position;
-			buffDisplay[i].transform.position += (new Vector3(16+(i*66),-16,0));
-			buffDisplay[i].SetActive(false);
+			Texture2D buffBackground = Resources.Load<Texture2D>("Sprites/Skill Sprites/background/skillBkg_green");
+			Texture2D buffImage = Resources.Load<Texture2D>("Sprites/Skill Sprites/sprite/"+b.getName());
+			if (buffBackground != null) {
+				int xx = 20+(i*50);
+				int yy = 20;
+				int w = 48;
+				int h = 48;
+				GUI.DrawTexture(new Rect(xx,yy,w,h),buffBackground);
+				GUI.Label(new Rect(xx,yy+60,w,h),b.getTime().ToString(),style);
+				if (buffImage != null) {
+					GUI.DrawTexture(new Rect(xx,yy,w,h),buffImage);
+				}
+			}
 		}
 	}
-	
+	void Update() {
+		GameObject player = GameObject.Find("Player");
+		if (player != null) {
+			playerBuffList = player.GetComponent<PlayerBehavior>().buffList;
+		}
+	}
+
 	// Update is called once per frame
-	void Update () {
+	// This methods relies on instantiating GameObjects
+	/*void Update () {
 		GameObject player = GameObject.Find("Player");
 		if (player != null) {
 			playerBuffList = player.GetComponent<PlayerBehavior>().buffList;
@@ -49,5 +72,5 @@ public class BuffPanelBehavior : MonoBehaviour {
 				buffDisplay[i].SetActive(false);
 			}
 		}
-	}
+	}*/
 }
