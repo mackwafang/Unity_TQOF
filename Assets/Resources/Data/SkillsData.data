@@ -1,0 +1,45 @@
+Heavy Impact|"[FORCE MASTER]Force damage increase by 25%/Level"|10|0|null|1.1|5|0|0.1|5|300|TRUE
+Piercing Force|"[FORCE MASTER]Force penetrates enemies and inflict normal damage"|10|15|Heavy Impact|1|20|0|1|10|600|TRUE
+Swarm|"[FORCE MASTER]\nSummon a set of forces and attack the enemy"|10|25|Piercing Force|100|90|0|10|20|900|TRUE
+Escort|"[FORCE MASTER]\nSummon 10 forces that surrounds you and attack nearby enemies"|5|50|Swarm|10|150|0|60|50|1500|TRUE
+Enhanced Sword|"[SWORD MASTER]\nIncrease attack power by 25%/Level"|10|0|null|1|5|0.2|0.25|5|300|TRUE
+Swift Strike|"[SWORD MASTER]\n+1 Attack Speed/Level, but -5% Attack/Level"|10|15|Enhanced Sword|0|20|0|1|10|600|TRUE
+Weapon Summon|"[SWORD MASTER]\nSummons weapons that will inflict bleed on attacked enemies"|10|25|Swift Strike|0|90|0|0.1|20|900|TRUE
+Lightning Strike|"[SWORD MASTER]\nAttack all enemies nearby, but reduces HP by 25%"|5|50|Weapon Summon|5|150|0|0|50|1500|TRUE
+Healing Circle|"[WAZARD]\nCreate a healing circle that heals yourself and damages enemy"|10|0|null|0|5|0|0.5|5|300|TRUE
+Magic-Infused Staff|"[WAZARD]\nMelee attack adds magic damage. Also greatly increases SP generation."|10|15|Healing Circle|0|0|0|0|10|600|TRUE
+Wazard skill 3|???|10|25|Magic-Infused Staff|0|0|0|0|20|900|TRUE
+Wazard skill 4|???|5|50|???|0|0|0|0|50|1500|TRUE
+Full Draw|"[SHARPSHOOTER]\nArrow damage and speed triples, but attack speed is halved."|10|0|null|0|0|0|0|5|300|TRUE
+Fire Arrow|"[SHARPSHOOTER]\nArrow damage increases by 50% and 5% chance to set enemies on fire"|10|15|Full Draw|0|0|0|0|10|600|TRUE
+Barrage|"[SHARPSHOOTER]\nFire arrows in an arc"|10|25|Fire Arrow|5|3|0|1|20|900|TRUE
+Gungnir|"[SHARPSHOOTER]\nRain arrows from all direction and attack the enemy"|5|50|Barrage|5|150|0|0|50|1500|TRUE
+Physical I|"Strength +10\n+5 Strength/Level"|20|0|null|10|0|0|5|0|0|FALSE
+Physical II|"Strength +25\n+10 Strength/Level"|15|20|Physical I|25|0|0|10|0|0|FALSE
+Physical III|"Strength +40\n+15 Strength/Level"|10|35|Physical II|40|0|0|15|0|0|FALSE
+Physical IV|"Strength +100\n+20 Strength/Level"|5|50|Physical III|50|0|0|20|0|0|FALSE
+Survivability I|"HP +100\n+20 HP/Level"|20|0|null|100|0|0|20|0|0|FALSE
+Survivability II|"HP +200\n+40 HP/Level"|15|20|Vitality I|200|0|0|40|0|0|FALSE
+Survivability III|"HP +500\n+60 HP/Level"|10|35|Vitality II|500|0|0|60|0|0|FALSE
+Survivability IV|"HP +1000\n+75 HP/Level"|5|50|Vitality III|1000|0|0|75|0|0|FALSE
+Magic I|"Mana +10\n+5 Mana/Level\n+50 MP"|20|0|null|10|50|0|5|0|0|FALSE
+Magic II|"Mana +25\n+10 Mana/Level\n+100 MP"|15|20|Magic I|25|100|0|10|0|0|FALSE
+Magic III|"Mana +40\n+15 Mana/Level\n+250 MP"|10|35|Magic II|40|250|0|15|0|0|FALSE
+Magic IV|"Mana +100\n+20 Mana/Level\n+500 MP"|5|50|Magic III|50|500|0|20|0|0|FALSE
+Mana Gatherer|MP generation +3/Level|3|25|Magic I|0|0|0|3|0|0|FALSE
+Mana Collector|MP generation +4/Level|3|30|Mana Gatherer|0|0|0|4|0|0|FALSE
+Unlimited Mana|MP generation +5/Level|3|40|Mana Collector|0|0|0|5|0|0|FALSE
+Regeneration I|HP generation +5/Level|3|25|Vitality I|0|0|0|5|0|0|FALSE
+Regeneration II|HP generation +10/Level|3|30|Regeneration I|0|0|0|10|0|0|FALSE
+Regeneration III|HP generation +15/Level|3|40|Regeneration II|0|0|0|15|0|0|FALSE
+Weakness Analysis|Increases critical rate by 5%/Level|10|25|null|5|0|0|5|0|0|FALSE
+Vital Strike I|Increase critical damage by 50|10|30|Weakness Analysis|0|0|0|50|0|0|FALSE
+Vital Strike II|Increase critical damage by 5%/Level|10|40|Vital Strike I|0|0|0|0.05|0|0|FALSE
+Defense I|"Stamina +10\n+5 Stamina/Level"|20|0|null|10|0|0|5|0|0|FALSE
+Defense II|"Stamina +25\n+10 Stamina/Level"|15|20|Defense I|25|0|0|10|0|0|FALSE
+Defense III|"Stamina +40\n+15 Stamina/Level"|10|35|Defense II|40|0|0|15|0|0|FALSE
+Defense IV|"Stamina +100\n+20 Stamina/Level"|5|50|Defense III|100|0|0|20|0|0|FALSE
+Vampire|For every special attack that hits an enemy, convert damage 0.5%/Level of damage dealt to HP|10|30|null|0|0|0|0.005|0|0|FALSE
+Energy Sap|For every normal attack that hits an enemy, convert damage 0.5%/Levek of damage dealt to MP|10|30|null|0|0|0|0.005|0|0|FALSE
+Haunting Drain|Increase effectiveness of [Vampire] by 1%/Level|10|60|Vampire|0|0|0|0.01|0|0|FALSE
+Continous Sap|Increase effectiveness of [Energy Sap] by 1%/Level|10|60|Energy Sap|0|0|0|0.01|0|0|FALSE
