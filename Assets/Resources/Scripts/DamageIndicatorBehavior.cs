@@ -28,6 +28,7 @@ public class DamageIndicatorBehavior : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		a.speed = 1+Time.deltaTime;
 		if (a.GetCurrentAnimatorStateInfo(0).normalizedTime > 1) {
 			Destroy(gameObject);
 		}

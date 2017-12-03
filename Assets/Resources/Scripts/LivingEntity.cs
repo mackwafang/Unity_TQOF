@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class LivingEntity : MonoBehaviour {
 	public string name = "";
-
 	public bool canMove = true;
 	public int level = 1;
 	public int xp = 0;

@@ -25,17 +25,17 @@ public class DataController : MonoBehaviour {
 		setSkill(1,"Piercing Force");
 		setSkill(2,"Swarm");
 		setSkill(3,"Escort");
-		skillCooldown[0] = hotkeySkills[0].getCooldown();
-		skillCooldown[1] = hotkeySkills[1].getCooldown();
-		skillCooldown[2] = hotkeySkills[2].getCooldown();
-		skillCooldown[3] = hotkeySkills[3].getCooldown();
+		// skillCooldown[0] = hotkeySkills[0].getCooldown();
+		// skillCooldown[1] = hotkeySkills[1].getCooldown();
+		// skillCooldown[2] = hotkeySkills[2].getCooldown();
+		// skillCooldown[3] = hotkeySkills[3].getCooldown();
 
 		for (int i = 0; i < 4; i++) {
 			if (ui_skill != null) {
 				skill_cd_bar[i] = ui_skill[i].GetComponent<Slider>();
-				GameObject c = ui_skill[i].transform.GetChild(3).gameObject;
+				GameObject c = ui_skill[i].transform.GetChild(4).gameObject;
 				skill_cd_text[i] = c.GetComponent<Text>();
-				c = ui_skill[i].transform.GetChild(2).gameObject;
+				c = ui_skill[i].transform.GetChild(3).gameObject;
 				skill_usable_sprite[i] = c;
 			}
 		}
@@ -49,7 +49,7 @@ public class DataController : MonoBehaviour {
 					/* Black out if player does not have the proper requirement */
 					PlayerBehavior player = GameObject.Find("Player").GetComponent<PlayerBehavior>();
 					if (player != null) {
-						if (player.level < hotkeySkills[i].getRequiredLevel() && player.mp < hotkeySkills[i].getMPCost()) {
+						if ((player.mp < hotkeySkills[i].getMPCost()) && (player.level < hotkeySkills[i].getRequiredLevel())) {
 							//skill is unusable
 							skill_usable_sprite[i].SetActive(true);
 						}

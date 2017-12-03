@@ -71,7 +71,7 @@ public class PlayerBehavior : LivingEntity {
 						mp -= 1;
 						if (force != null) {
 							/* Spawn projectile */
-							createForce(new Vector2(xx,yy),10);
+							createForce(new Vector2(xx,yy), 10,false,0);
 						}
 					}
 				}
@@ -89,18 +89,27 @@ public class PlayerBehavior : LivingEntity {
 								controller.skillCooldown[i] = s.getCooldown();
 								// TODO: USE SKILLS
 								if (!isBuffActive(s.getName())) {
-									addBuff(s.getName(),s.getDescription(),(s.getCooldown()-120)/60,s.getPrimaryEffect(),s.getSecondaryEffect(),false);
+									switch(s.getName()) {
+										case "Swarm":
+											for (int k = 0; k < 100; k++) {
+												float xto = Mathf.Cos(Random.Range(0,360)*Mathf.Deg2Rad);
+												float yto = Mathf.Sin(Random.Range(0,360)*Mathf.Deg2Rad);
+												GameObject f = createForce(new Vector2(xto,yto), Random.Range(5,7),true,0.5f);
+												ForceBehavior f_b = f.GetComponent<ForceBehavior>();
+												if (f_b.isPierce) {f_b.isPierce = false;}
+												f_b.dmg_mod *= 0.75f;
+												SpriteRenderer s_r = f.GetComponent<SpriteRenderer>();
+												s_r.sprite = Resources.Load<Sprite>("Sprites/Mini Force");
+											}
+											break;
+										default:
+											addBuff(s.getName(),s.getDescription(),(s.getCooldown()-120)/60,s.getPrimaryEffect(),s.getSecondaryEffect(),false);
+											break;
+									}
 								}
 							}
 						}
 					}
-				}
-			}
-			if (isBuffActive("Swarm")) {
-				Buff b = findBuff("Swarm");
-				for (int i = 0; i < b.getPrimaryEffect(); i++) {
-					//create force
-					
 				}
 			}
 			/*Update UI*/
@@ -130,19 +139,21 @@ public class PlayerBehavior : LivingEntity {
 		updateStats (); //update stats if any changes were made
 	}
 
-	private void createForce(Vector3 to, int speed) {
+	private GameObject createForce(Vector3 to, int speed, bool findNearest, float homingDelay) {
 		GameObject projectile = Instantiate (force, transform.position, transform.rotation);
 		ForceBehavior projectileBehavior = projectile.GetComponent<ForceBehavior>();
+		projectileBehavior.setHoming(findNearest,homingDelay);
 		Rigidbody2D projectile_body = projectile.GetComponent<Rigidbody2D> ();
 		Vector2 norm = new Vector2 (to.x, to.y).normalized;
 		projectile_body.velocity = norm * speed;
 		if (isBuffActive("Heavy Impact")) {
 			Buff b = findBuff("Heavy Impact");
-			projectileBehavior.dmg_mod = b.getPrimaryEffect();
+			projectileBehavior.dmg_mod += b.getPrimaryEffect();
 		}
 		if (isBuffActive("Piercing Force")) {
 			Buff b = findBuff("Piercing Force");
 			projectileBehavior.setPiercing((int) b.getPrimaryEffect());
 		}
+		return projectile;
 	}
 }
