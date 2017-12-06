@@ -114,16 +114,8 @@ public class LivingEntity : MonoBehaviour {
 			}
 		}
 		/* HP/MP Smooth transition */
-		if (hp > hpDisplay) {
-			hpDisplay = Mathf.MoveTowards (hpDisplay, hp, maxHP*0.005f);
-		} else {
-			hpDisplay = hp;
-		}
-		if (mp > mpDisplay) {
-			mpDisplay = Mathf.MoveTowards (mpDisplay, mp, maxMP*0.005f);
-		} else {
-			mpDisplay = mp;
-		}
+		hpDisplay = Mathf.MoveTowards (hpDisplay, hp, maxHP*0.005f);
+		mpDisplay = Mathf.MoveTowards (mpDisplay, mp, maxMP*0.005f);
 	}
 
 	void OnCollisionEnter2D (Collision2D other) {

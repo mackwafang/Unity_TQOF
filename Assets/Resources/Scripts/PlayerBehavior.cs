@@ -81,30 +81,32 @@ public class PlayerBehavior : LivingEntity {
 			DataController controller = controller_object.GetComponent<DataController>();
 			for (int i = 0; i < 4; i += 1) {
 				if (Input.GetKeyDown(controller.skillKeys[i])) {
-					if (controller.hotkeySkills[i] != null) {
-						if (controller.skillCooldown[i] <= 0) {
-							Skill s = controller.hotkeySkills[i];
-							if (mp >= s.getMPCost()) {
-								mp -= s.getMPCost();
-								controller.skillCooldown[i] = s.getCooldown();
-								// TODO: USE SKILLS
-								if (!isBuffActive(s.getName())) {
-									switch(s.getName()) {
-										case "Swarm":
-											for (int k = 0; k < 100; k++) {
-												float xto = Mathf.Cos(Random.Range(0,360)*Mathf.Deg2Rad);
-												float yto = Mathf.Sin(Random.Range(0,360)*Mathf.Deg2Rad);
-												GameObject f = createForce(new Vector2(xto,yto), Random.Range(5,7),true,0.5f);
-												ForceBehavior f_b = f.GetComponent<ForceBehavior>();
-												if (f_b.isPierce) {f_b.isPierce = false;}
-												f_b.dmg_mod *= 0.75f;
-												SpriteRenderer s_r = f.GetComponent<SpriteRenderer>();
-												s_r.sprite = Resources.Load<Sprite>("Sprites/Mini Force");
-											}
-											break;
-										default:
-											addBuff(s.getName(),s.getDescription(),(s.getCooldown()-120)/60,s.getPrimaryEffect(),s.getSecondaryEffect(),false);
-											break;
+					if (level >= controller.hotkeySkills[i].getRequiredLevel()) {
+						if (controller.hotkeySkills[i] != null) {
+							if (controller.skillCooldown[i] <= 0) {
+								Skill s = controller.hotkeySkills[i];
+								if (mp >= s.getMPCost()) {
+									mp -= s.getMPCost();
+									controller.skillCooldown[i] = s.getCooldown();
+									// TODO: USE SKILLS
+									if (!isBuffActive(s.getName())) {
+										switch(s.getName()) {
+											case "Swarm":
+												for (int k = 0; k < 100; k++) {
+													float xto = Mathf.Cos(Random.Range(0,360)*Mathf.Deg2Rad);
+													float yto = Mathf.Sin(Random.Range(0,360)*Mathf.Deg2Rad);
+													GameObject f = createForce(new Vector2(xto,yto), Random.Range(5,7),true,0.5f);
+													ForceBehavior f_b = f.GetComponent<ForceBehavior>();
+													if (f_b.isPierce) {f_b.isPierce = false;}
+													f_b.dmg_mod *= 0.75f;
+													SpriteRenderer s_r = f.GetComponent<SpriteRenderer>();
+													s_r.sprite = Resources.Load<Sprite>("Sprites/Mini Force");
+												}
+												break;
+											default:
+												addBuff(s.getName(),s.getDescription(),(s.getCooldown()-120)/60,s.getPrimaryEffect(),s.getSecondaryEffect(),false);
+												break;
+										}
 									}
 								}
 							}
@@ -117,13 +119,13 @@ public class PlayerBehavior : LivingEntity {
 				hp_bar.minValue = 0;
 				hp_bar.maxValue = maxHP;
 				hp_bar.value = hpDisplay;
-				hp_text.text = hp.ToString();
+				hp_text.text =((int) hpDisplay).ToString();
 			}
 			if (mp_bar != null && mp_text != null) {
 				mp_bar.minValue = 0;
 				mp_bar.maxValue = maxMP;
 				mp_bar.value = mpDisplay;
-				mp_text.text = mp.ToString();
+				mp_text.text = ((int) mpDisplay).ToString();
 			}
 			if (xp_bar != null && xp_text != null) {
 				xp_bar.minValue = 0;

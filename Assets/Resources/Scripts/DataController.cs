@@ -46,19 +46,31 @@ public class DataController : MonoBehaviour {
 		for (int i = 0; i < 4; i++) {
 			if (ui_skill[i] != null) {
 				if (hotkeySkills[i] != null) {
+					/* Place sprite */
+					Image skillImage = ui_skill[i].gameObject.transform.GetChild(1).gameObject.GetComponent<Image>();
+					Sprite s_i = Resources.Load<Sprite>("Sprites/Skill Sprites/sprite/"+hotkeySkills[i].getName());
+					if (s_i == null) {
+						s_i = Resources.Load<Sprite>("Sprites/Skill Sprites/sprite/Missing Sprite");
+					}
+					skillImage.sprite = s_i;
+
 					/* Black out if player does not have the proper requirement */
 					PlayerBehavior player = GameObject.Find("Player").GetComponent<PlayerBehavior>();
 					if (player != null) {
-						if ((player.mp < hotkeySkills[i].getMPCost()) && (player.level < hotkeySkills[i].getRequiredLevel())) {
-							//skill is unusable
-							skill_usable_sprite[i].SetActive(true);
+						if (player.level >= hotkeySkills [i].getRequiredLevel()) {
+							if ((player.mp < hotkeySkills [i].getMPCost())) {
+								//skill is unusable
+								skill_usable_sprite [i].SetActive (true);
+							} else {
+								//skill is usable
+								if (skillCooldown [i] <= 0 && skill_usable_sprite [i].activeSelf) {
+									createSkillNotice (ui_skill [i]);
+								}
+								skill_usable_sprite [i].SetActive (false);
+							}
 						}
 						else {
-							//skill is usable
-							if (skillCooldown[i] <= 0 && skill_usable_sprite[i].activeSelf) {
-								createSkillNotice(ui_skill[i]);
-							}
-							skill_usable_sprite[i].SetActive(false);
+							skill_usable_sprite [i].SetActive (true);
 						}
 					}
 					/* Set display values */
